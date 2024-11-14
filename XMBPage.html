@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>XMB Start Page</title>
+    <!-- The source for the CSS, Java script and Jquery, in that order -->
+    <link rel="stylesheet" type="text/css" href="XMBCSS.css" />
+    <script src="XMBJS.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- When the document finishes loading, using the API key, send a request out and recieve weather data
+    then use that weather data to fill in the Info Panel, and the Weather items -->
+    <script>
+        let apiKey = "7f2279ef10e8a8a3548b6fa4354bee67";
+        $(document).ready(function () {
+            var location = "akron";
+            $.ajax({
+                url: 'http:\\api.openweathermap.org/data/2.5/weather?' + 'q' + '=' + location + '&units=imperial&appid=' + apiKey,
+                dataType: "jsonp",
+                type: "GET",
+                success: function (data) {
+                    var result = WeatherInput(data);
+                    console.log(data);
+                    $("#Environment").html(result);
+                    $("#Environment").val('');
+                }
+            })
+        })
+    </script>
+
+    <!-- The background video, an upscaled form of the ps3 background  -->
+    <video autoplay muted loop id="XMBBackground">
+        <source src="Ps3XmbWaveBlue2k2.webm" type="video/webm">
+    </video>
+
+    <!-- The info panel is the panel i nthe top right that has time and weather  -->
+    <div id="TheInfoPanel">
+        <div id="InfoTime" class="infoPanel">
+            <script>
+                someTime();
+            </script>
+        </div>
+        <div id="Environment" class="infoPanel">
+            <!-- Left empty to be filled in by the weather function  -->
+        </div>
+    </div>
+
+    <!-- The main categories, which are "Baskets" that hold "Items" -->
+    <!-- for comments about the items look at the bottom of the page  -->
+    <div id="main">
+
+        <ol class="category" id="categories">
+
+            <!-- The weather basket that holds items containing parsed data about the weather  -->
+            <li>
+                <ol class="Bucket" id="Weather">
+
+                    <div class="CatIcon" id="WeatherIcon">
+                        <img src="XMBWeatherIcon.png">
+                    </div>
+
+                    <div class="item">
+
+                        <li id="WeatherItem1">
+                            <img src="thermometer.png" class="ItemIcon">
+                            <div class="title-left">
+                                Temperature
+                                <div class="descriptor-left" id="WeatherTemperature">
+                                    <!-- left blank to be filled in by the weather function  -->
+                                </div>
+                            </div>
+                        </li>
+
+                        <li id="WeatherItem2">
+                            <img src="wind.png" class="ItemIcon">
+                            <div class="title-left">
+                                Wind and Humidity
+                                <div class="descriptor-left" id="WeatherWNH">
+                                    <!-- left blank to be filled in by the weather function  -->
+                                </div>
+                            </div>
+                        </li>
+
+                        <li id="WeatherItem3">
+                            <img s class="ItemIcon" id="weatherIcon">
+                            <div class="title-left">
+                                Weather
+                                <div class="descriptor-left" id="WeatherWeather">
+                                    <!-- left blank to be filled in by the weather function  -->
+                                </div>
+                            </div>
+                        </li>
+
+                        <li id="WeatherItem4">
+                            <img src="sun.png" class="ItemIcon">
+                            <div class="title-left">
+                                Sun
+                                <div class="descriptor-left" id="WeatherSun">
+                                    <!-- left blank to be filled in by the weather function  -->
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+
+                </ol>
+            </li>
+            <!-- the basket which holds music items  -->
+            <li>
+                <ol class="Bucket" id="Music">
+
+                    <div class="CatIcon" id="Music">
+                        <img src="XMBMusicIcon.png">
+                    </div>
+
+                    <div class="item">
+
+                        <li id="MusicItem1">
+                            <a href="https://soundcloud.com/">
+                                <img src="soundcloud.svg" class="ItemIcon">
+                            </a>
+                            <div class="title-left">
+                                SoundCloud
+                                <div class="descriptor-left">
+                                    SoundCloud is an online audio distribution platform and music sharing website.
+                                </div>
+                            </div>
+                        </li>
+
+                        
+
+                        <li id="MusicItem2">
+                            <a href="https://genius.com/">
+                                <img src="genius.svg" class="ItemIcon">
+                            </a>
+                            <div class="title-left">
+                                Genius
+                                <div class="descriptor-left">
+                                    Genius allows users to provide annotations and interpretation to song lyrics, news
+                                    stories, sources, poetry, and documents.
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ol>
+            </li>
+            <!-- the basket which holds media items  -->
+            <li>
+                <ol class="Bucket" id="Media">
+
+                    <div class="CatIcon" id="MediaIcon">
+                        <img src="XMBMediaIcon.png">
+                    </div>
+
+                    <div class="item">
+
+                        <li id="MediaItem1">
+                            <a href="https://www.youtube.com/feed/subscriptions">
+                                <img src="youtube.svg" class="ItemIcon">
+                            </a>
+                            <div class="title-left">
+                                Youtube
+                                <div class="descriptor-left">
+                                    YouTube is an American online video sharing
+                                    and social media platform headquartered in San Bruno, California.
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="Bucket1Items" id="MediaItem2">
+                            <a href="https://www.twitch.tv/">
+                                <img src="twitch.svg" class="ItemIcon">
+                                <div class="title-left">
+                                    Twitch
+                                    <div class="descriptor-left">
+                                        Twitch is an American video live streaming service that focuses on
+                                        video game live streaming.
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="Bucket1Items" id="MediaItem3">
+                            <a href="https://www.netflix.com/browse">
+                                <img src="netflix.svg" class="ItemIcon">
+                            </a>
+                            <div class="title-left">
+                                Netflix
+                                <div class="descriptor-left">
+                                    Netflix, Inc. is an American subscription
+                                    streaming service and production company.
+                                </div>
+                            </div>
+                        </li>
+                        <li class="Bucket1Items" id="MediaItem4">
+                            <a href="https://www.hulu.com">
+                                <img src="hulu.svg" class="ItemIcon">
+                            </a>
+                            <div class="title-left">
+                                Hulu
+                                <div class="descriptor-left">
+                                    Hulu is an American subscription streaming service majority-owned
+                                    by The Walt Disney Company,
+                                    with Comcast’s NBCUniversal holding a minority stake.
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ol>
+            </li>
+            <!-- the basket which holds device items, items that are locally hosted -->
+            <li>
+                <ol class="Bucket" id="Devices">
+
+                    <div class="CatIcon" id="DeviceIcon">
+                        <img src="XMBDevicesIcon.png">
+                    </div>
+
+                    <div class="item">
+                        <li id="DevicesItem1">
+                            <a href="http://octopi.local/">
+                                <img src="OctoprintIcon.png" class="ItemIcon">
+                            </a>
+                            <div class="title-left">
+                                Octoprint
+                                <div class=" descriptor-left">
+                                    OctoPrint is an open source 3D printer controller application,
+                                    which provides a web interface for the connected printers.
+                                </div>
+                            </div>
+
+
+                        <li id="DevicesItem2">
+                            <a href="http://uberleds.local/">
+                                <img src="LEDStripIcon.png" class="ItemIcon">
+                            </a>
+                            <div class="title-left">
+                                Led Strip
+                                <div class=" descriptor-left">
+                                    An LED strip light (also known as an LED tape or ribbon light)
+                                    is a flexible circuit board populated by surface mounted light-emitting diodes (SMD
+                                    LEDs) and
+                                    other components that usually comes with an adhesive backing.
+                                </div>
+                            </div>
+
+
+
+
+                </ol>
+            </li>
+            <!-- the basket which holds cursed social media items -->
+            <li>
+                <ol class="Bucket" id="SocialMedia">
+
+                    <div class="CatIcon" id="SocialMediaIcon">
+                        <img src="XMBSocialMediaIcon.png">
+                    </div>
+
+                    <div class="item">
+
+                        <li id="SocialMediaItem1">
+                            <a href="https://twitter.com/home">
+                                <img src="twitter.svg" class="ItemIcon" id="Item1Icon">
+                            </a>
+                            <div class="title-left">
+                                Twitter
+                                <div class="descriptor-left">
+                                    The company operates the microblogging and social networking service Twitter.
+                                </div>
+                            </div>
+                        </li>
+
+                        <li id="SocialMediaItem2">
+                            <a href="https://www.reddit.com/">
+                                <img src="reddit.svg" class="ItemIcon" id="Item1Icon">
+                            </a>
+                            <div class="title-left">
+                                Reddit
+                                <div class="descriptor-left">
+                                    Reddit is an American social news aggregation, content rating, and discussion
+                                    website.
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ol>
+            </li>
+            <!-- the basket which holds school items -->
+            <li>
+                <ol class="Bucket" id="School">
+
+                    <div class="CatIcon" id="SchoolIcon">
+                        <img src="XMBSchoolIcon.png" id="schoolicon">
+                    </div>
+
+                    <div class="item">
+
+                        <li id="SchoolItem1">
+                            <a href="https://my.uakron.edu/">
+                                <img src="MyAkronIcon.png" class="ItemIcon" id="Item1Icon">
+                            </a>
+                            <div class="title-left">
+                                MyAkron
+                                <div class=" descriptor-left">
+                                    University of Akron's web portal to it's various services.
+                                </div>
+                            </div>
+                        </li>
+
+                        <li id="SchoolItem2">
+                            <a href="https://brightspace.uakron.edu/d2l/home">
+                                <img src="BrightSpaceIcon.png" class="ItemIcon" id="Item2Icon">
+                            </a>
+                            <div class="title-left">
+                                Brightspace
+                                <div class=" descriptor-left">
+                                    A online learning and teaching platform for schools and companies.
+                                </div>
+                            </div>
+                        </li>
+
+                        <li id="SchoolItem3">
+                            <a href="https://outlook.office.com/mail/">
+                                <img src="microsoftoutlook.svg" class="ItemIcon" id="Item3Icon">
+                            </a>
+                            <div class="title-left">
+                                Microsoft Outlook
+                                <div class=" descriptor-left">
+                                    Outlook.com is a personal information manager web app from Microsoft
+                                    consisting of webmail, calendaring, contacts, and tasks services.
+                                </div>
+                            </div>
+                        </li>
+
+                    </div>
+                </ol>
+            </li>
+
+        </ol>
+        <!-- script that retrieves the amount of items, and adds a function to each of them that checks if they go off screen
+        if they go off screen then their normal title and description class gets replaced with a different one that swaps
+        the normal right sided title and description for the a left side one. This check is performed on mouse hover -->
+        <script>
+            var itemIcons = document.querySelectorAll(".ItemIcon");
+            var descriptors = document.querySelectorAll(".descriptor-left");
+            var titles = document.querySelectorAll(".title-left");
+            var numberOfItems = document.querySelectorAll(".ItemIcon").length;
+            for (let i = 0; i < numberOfItems; i++) {
+                itemIcons[i].addEventListener("mouseover", function () { isOverFlow(descriptors[i], titles[i]) });
+            }
+        </script>
+
+    </div>
+
+</body>
+
+</html>
+
+<!-- cookie cutter item thing
+    This says gives the item its id, which is its basket and item number
+<li   id="MediaItem1">
+    this is its icon and attached link if there is one
+    <a href="https://www.youtube.com/feed/subscriptions">
+        <img src="youtube.svg"  class="ItemIcon"  >
+    </a>
+    this is its title and description, which the class its self is subject to change
+    if the descript would reside off screen
+    <div class="title-left">
+         Youtube
+        <div class=" descriptor-left">
+             YouTube is an American online video sharing 
+            and social media platform headquartered in San Bruno, California.
+        </div>
+    </div>
+</li> -->
